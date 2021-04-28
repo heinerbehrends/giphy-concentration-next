@@ -1,4 +1,4 @@
-export const makeCards = (linkArray: string[]): Cards => {
+export function makeCards(linkArray: string[]): Cards {
   const links = shuffleDuplicateElements(linkArray);
   return links.map((link, i) => ({
     key: i,
@@ -6,7 +6,7 @@ export const makeCards = (linkArray: string[]): Cards => {
     isFlipped: false,
     isVisible: true,
   }));
-};
+}
 
 export type CardT = {
   key: number;
@@ -17,27 +17,23 @@ export type CardT = {
 
 export type Cards = CardT[];
 
-export function makeNextCards(cards: Cards) {
-  if (cards === null) return null;
+export function makeNextCards(cards: [CardT]) {
   return isPair(cards)
     ? changeFlipped(cards, 'isVisible')
     : changeFlipped(cards, 'isFlipped');
 }
 
-export const cardCount = (cards: Cards) =>
+export const countCards = (cards: Cards) =>
   cards.filter((card) => card.isVisible).length;
 
 export function flipCard(cards: Cards, key: number) {
-  if (cards === null) return null;
   return cards.map((card) =>
     card.key === key ? { ...card, isFlipped: true } : card
   );
 }
 
 export function shouldFlip(cards: Cards, key: number, flipCount: number) {
-  if (!!cards) {
-    return flipCount < 2 && !cards[key].isFlipped && cards[key].isVisible;
-  }
+  return flipCount < 2 && !cards[key].isFlipped && cards[key].isVisible;
 }
 
 function shuffleArray<Type>(array: Type[]): Type[] {

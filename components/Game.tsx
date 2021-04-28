@@ -2,43 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Board from './Board';
 import Search from './Search';
 
-import {
-  makeNextCards,
-  cardCount,
-  flipCard,
-  shouldFlip,
-  CardT,
-  Cards,
-} from '../logic/logic';
+import { makeNextCards, countCards, CardT, Cards } from '../logic/logic';
+import { useFetchCards } from '../logic/useFetchCards';
+import { useClickCard } from '../logic/gameLogic';
 
 function Game() {
-  const [input, setInput] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState<CardT[] | null>(null);
+  const [input, setInput] = useState('');
+
   const [flipCount, setFlipCount] = useState(0);
-
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setInput(event.target.value);
-  }
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    await fetch('./api/giphy-fetch', {
-      body: JSON.stringify({ searchTerm: input }),
-      method: 'POST',
-    })
-      .then((response) => response.json())
-      .then(({ data }) => setCards(data.cards));
-  }
-
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     search(searchTerm, options);
-  //   }
-  // }, [searchTerm]);
-
   useEffect(() => {
     if (flipCount === 2) {
-      const nextCards = makeNextCards(cards as Cards);
+      const nextCards = makeNextCards(cards as [CardT]);
       setTimeout(() => {
         setFlipCount(0);
         setCards(nextCards);
@@ -46,16 +21,15 @@ function Game() {
     }
   });
 
-  if (cards && !cardCount(cards)) {
+  const { clickCard } = useClickCard(cards as Cards, setCards, setFlipCount);
+  const { handleSubmit } = useFetchCards(input, setCards);
+
+  if (cards && !countCards(cards)) {
     setCards(null);
     setInput('');
   }
-
-  function clickCard(key: number, flipCount: number) {
-    if (shouldFlip(cards as Cards, key, flipCount)) {
-      setFlipCount(flipCount + 1);
-      setCards(flipCard(cards as Cards, key));
-    }
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setInput(event.target.value);
   }
 
   return (

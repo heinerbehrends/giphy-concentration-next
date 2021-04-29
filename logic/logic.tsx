@@ -1,13 +1,3 @@
-export function makeCards(linkArray: string[]): Cards {
-  const links = shuffleDuplicateElements(linkArray);
-  return links.map((link, i) => ({
-    key: i,
-    url: link,
-    isFlipped: false,
-    isVisible: true,
-  }));
-}
-
 export type CardT = {
   key: number;
   url: string;
@@ -17,14 +7,23 @@ export type CardT = {
 
 export type Cards = CardT[];
 
-export function makeNextCards(cards: [CardT]) {
-  return isPair(cards)
-    ? changeFlipped(cards, 'isVisible')
-    : changeFlipped(cards, 'isFlipped');
+export function makeCards(linkArray: string[]): Cards {
+  const links = shuffleAndDuplicate(linkArray);
+  return links.map((link, i) => ({
+    key: i,
+    url: link,
+    isFlipped: false,
+    isVisible: true,
+  }));
 }
 
-export const countCards = (cards: Cards) =>
-  cards.filter((card) => card.isVisible).length;
+export function makeNextCards(cards: [CardT]) {
+  return flipOrRemove(cards, isPair(cards));
+}
+
+export function countCards(cards: Cards) {
+  return cards.filter((card) => card.isVisible).length;
+}
 
 export function flipCard(cards: Cards, key: number) {
   return cards.map((card) =>
@@ -48,30 +47,26 @@ function duplicateElement<Type>(array: Type[]) {
   return array.map((element) => [element, element]).flat();
 }
 
-function shuffleDuplicateElements<Type>(array: Type[]) {
+function shuffleAndDuplicate<Type>(array: Type[]) {
   return shuffleArray(duplicateElement(array));
 }
 
-const getFlipped = (cards: Cards) =>
-  cards.filter((card) => card.isFlipped && card.isVisible);
+function getFlipped(cards: Cards) {
+  return cards.filter((card) => card.isFlipped && card.isVisible);
+}
 
-const isPair = (cards: Cards) => {
-  const flippedCards = getFlipped(cards);
-  const [flippedOne, flippedTwo] = flippedCards;
+function isPair(cards: Cards) {
+  const [flippedOne, flippedTwo] = getFlipped(cards);
   return flippedOne.url === flippedTwo.url;
-};
+}
 
-const changeFlipped = (cards: Cards, flag: string) =>
-  cards.map((card) => {
+function flipOrRemove(cards: Cards, isPair: boolean) {
+  return cards.map((card) => {
     if (card.isFlipped) {
-      switch (flag) {
-        case 'isFlipped':
-          return { ...card, isFlipped: false };
-        case 'isVisible':
-          return { ...card, isVisible: false };
-        default:
-          return card;
-      }
+      return isPair
+        ? { ...card, isVisible: false }
+        : { ...card, isFlipped: false };
     }
     return card;
   });
+}

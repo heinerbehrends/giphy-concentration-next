@@ -7,12 +7,23 @@ const Form = styled.form`
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 1.5rem;
   margin-top: 3rem;
+  margin: 0 auto;
 `;
 
 const Input = styled.input`
-  padding: 0.5rem;
+  padding: 1rem;
   font-size: 1.5rem;
   margin-left: 1.5rem;
+`;
+const Button = styled(Input)`
+  padding-left: 3rem;
+  padding-right: 3rem;
+`;
+
+const SearchSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 type SearchProps = {
@@ -32,12 +43,19 @@ export default function Search({
     return null;
   }
   return (
-    <Form onSubmit={handleSubmit}>
-      <label>
-        Search Giphy to start a game...
-        <Input type="text" value={value} onChange={handleChange} />
-      </label>
-      <Input type="submit" value="Go!" />
-    </Form>
+    <>
+      <h1>Search Giphy to start a game</h1>
+      <SearchSection>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            placeholder={'Enter search term'}
+            value={value}
+            onChange={handleChange}
+          />
+          <Button type="submit" value="Go!" />
+        </Form>
+      </SearchSection>
+    </>
   );
 }

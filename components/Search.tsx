@@ -1,6 +1,5 @@
 import React, { ChangeEventHandler, FormEventHandler } from 'react';
 import styled from 'styled-components';
-import { CardT } from '../logic/logic';
 
 const Form = styled.form`
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
@@ -30,18 +29,13 @@ type SearchProps = {
   handleChange: ChangeEventHandler<HTMLInputElement>;
   handleSubmit: FormEventHandler<HTMLFormElement>;
   value: string;
-  cards: CardT[] | null;
 };
 
 export default function Search({
   handleSubmit,
   handleChange,
   value,
-  cards,
 }: SearchProps) {
-  if (cards) {
-    return null;
-  }
   return (
     <>
       <h1>Search Giphy to start a game</h1>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Card, { CardProps } from './Card';
+import Card from './Card';
 import styled from 'styled-components';
 import { Cards } from '../logic/logic';
 

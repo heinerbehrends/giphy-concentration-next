@@ -13,16 +13,43 @@ const Input = styled.input`
   padding: 1rem;
   font-size: 1.5rem;
   margin-left: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
+  :focus {
+    border-width: 0.15rem;
+    box-shadow: 0.28rem 0.28em 0.56rem rgba(0, 0, 0, 0.3);
+    outline: none;
+    transform: scale(1.02);
+  }
+`;
+const TextInput = styled(Input)`
+  :focus {
+    box-shadow: 0.3rem 0.3em 0.6rem rgba(0, 0, 0, 0.3),
+      0.1rem 0.1rem 0.2rem rgb(189, 189, 189) inset;
+    outline: none;
+  }
 `;
 const Button = styled(Input)`
   padding-left: 3rem;
   padding-right: 3rem;
+  font-weight: 700;
+  background-color: rgba(255, 151, 151, 0.4);
+  :active {
+    transform: scale(1);
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
+  }
 `;
 
 const SearchSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+const Heading = styled.h1`
+  font-size: 3rem;
 `;
 
 type SearchProps = {
@@ -37,19 +64,17 @@ export default function Search({
   value,
 }: SearchProps) {
   return (
-    <>
-      <h1>Search Giphy to start a game</h1>
-      <SearchSection>
-        <Form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            placeholder={'Enter search term'}
-            value={value}
-            onChange={handleChange}
-          />
-          <Button type="submit" value="Go!" />
-        </Form>
-      </SearchSection>
-    </>
+    <SearchSection>
+      <Heading>Search Giphy to start a game</Heading>
+      <Form onSubmit={handleSubmit}>
+        <TextInput
+          type="text"
+          placeholder={'Enter search term'}
+          value={value}
+          onChange={handleChange}
+        />
+        <Button type="submit" value="Go!" />
+      </Form>
+    </SearchSection>
   );
 }

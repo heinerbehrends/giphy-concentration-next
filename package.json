@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "export",
-    "start": "next start",
-    "export": "next build && next export"
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "@giphy/js-fetch-api": "^3.0.0",

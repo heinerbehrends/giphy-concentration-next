@@ -10,16 +10,17 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  padding: 1rem;
-  font-size: 1.5rem;
   margin-left: 1.5rem;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  font-size: 1.5rem;
   border-radius: 1.5rem;
   box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
   :focus {
     border-width: 0.15rem;
     box-shadow: 0.28rem 0.28em 0.56rem rgba(0, 0, 0, 0.3);
     outline: none;
-    transform: scale(1.02);
+    transform: scale(1.05);
   }
 `;
 const TextInput = styled(Input)`
@@ -30,12 +31,13 @@ const TextInput = styled(Input)`
   }
 `;
 const Button = styled(Input)`
+  margin-left: 3rem;
   padding-left: 3rem;
   padding-right: 3rem;
   font-weight: 700;
   background-color: rgba(255, 151, 151, 0.4);
   :active {
-    transform: scale(0.98);
+    transform: scale(0.95);
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
   }
 `;

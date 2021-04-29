@@ -2,14 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import Board from '../components/Board';
 import { makeNextCards, countCards, CardT, Cards } from '../logic/logic';
 import { useClickCard } from '../logic/gameLogic';
-import { SearchTermContext } from '../pages/_app';
 import { useRouter } from 'next/router';
 
 function Game() {
   const [cards, setCards] = useState<CardT[] | null>(null);
   const [flipCount, setFlipCount] = useState(0);
-  const { searchTerm } = useContext(SearchTermContext);
   const router = useRouter();
+  const { searchTerm } = router.query;
 
   useEffect(() => {
     async function fetchGifs() {

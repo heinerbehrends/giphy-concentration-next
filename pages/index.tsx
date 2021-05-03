@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    router.push(`${input}`);
+    router.push(encodeURIComponent(input));
   }
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value);

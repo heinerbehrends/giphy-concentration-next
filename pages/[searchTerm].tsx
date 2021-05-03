@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import {
   isGameOver,
-  useClickCard,
+  useOnClickCard,
   useGamePlay,
   useFetchGiphy,
   useParseSearchTerm,
@@ -17,7 +17,11 @@ function Game() {
   const searchTerm = useParseSearchTerm(router);
   const { cards, setCards } = useFetchGiphy(searchTerm);
   const { flipCount, setFlipCount } = useGamePlay(cards as Cards, setCards);
-  const { clickCard } = useClickCard(cards as Cards, setCards, setFlipCount);
+  const { onClickCard } = useOnClickCard(
+    cards as Cards,
+    setCards,
+    setFlipCount
+  );
   const { showConfetti, setShowConfetti } = useShowConfetti(
     flipCount,
     cards as Cards
@@ -29,7 +33,11 @@ function Game() {
   return (
     <>
       {showConfetti ? <Confetti setShowConfetti={setShowConfetti} /> : null}
-      <Board cards={cards} flipCount={flipCount} handleCardClick={clickCard} />
+      <Board
+        cards={cards}
+        flipCount={flipCount}
+        handleCardClick={onClickCard}
+      />
     </>
   );
 }

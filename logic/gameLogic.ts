@@ -10,18 +10,18 @@ import {
   countCards,
 } from './logic';
 
-export function useClickCard(
+export function useOnClickCard(
   cards: Cards,
   setCards: React.Dispatch<React.SetStateAction<CardT[] | null>>,
   setFlipCount: React.Dispatch<React.SetStateAction<number>>
 ) {
-  function clickCard(key: number, flipCount: number) {
+  function onClickCard(key: number, flipCount: number) {
     if (shouldFlip(cards as Cards, key, flipCount)) {
       setFlipCount(flipCount + 1);
       setCards(flipCard(cards as Cards, key));
     }
   }
-  return { clickCard };
+  return { onClickCard };
 }
 
 export function useFetchGiphy(searchTerm: string) {

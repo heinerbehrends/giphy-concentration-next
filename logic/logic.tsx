@@ -55,7 +55,7 @@ function getFlipped(cards: Cards) {
   return cards.filter((card) => card.isFlipped && card.isVisible);
 }
 
-function isPair(cards: Cards) {
+export function isPair(cards: Cards) {
   const [flippedOne, flippedTwo] = getFlipped(cards);
   return flippedOne.url === flippedTwo.url;
 }

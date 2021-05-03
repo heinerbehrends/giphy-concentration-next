@@ -20,14 +20,6 @@ function Board({ cards, flipCount, handleCardClick }: BoardProps) {
     return null;
   }
   return (
-    // <Card
-    //   flipCount={0}
-    //   handleCardClick={handleCardClick}
-    //   isFlipped={true}
-    //   isVisible={true}
-    //   key={1}
-    //   url={'https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif'}
-    // />
     <BoardStyled>
       {cards.map((card) => Card({ ...card, handleCardClick, flipCount }))}
     </BoardStyled>

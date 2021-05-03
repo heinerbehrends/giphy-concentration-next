@@ -2,23 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { CardT } from '../logic/logic';
 
-// const CardStyled = styled.div<CardT>`
-//   background: url(${(props) => (props.isFlipped ? props.url : `backside.gif`)});
-// background-size: cover;
-// background-position: center, center;
-//   display: inline-block;
-//   content: ' ';
-//   height: 100px;
-//   width: 100px;
-//   margin: 10px;
-//   opacity: ${({ isVisible }) => (isVisible ? 100 : 0)};
-//   &:after {
-//     content: '';
-//     background: url(${({ url }) => url});
-//     opacity: 0;
-//   }
-// `;
-
 const CardScene = styled.div`
   width: 100px;
   height: 100px;

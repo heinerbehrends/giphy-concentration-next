@@ -69,7 +69,7 @@ export function isGameOver(cards: CardT[]) {
   return false;
 }
 
-export function useEndMove(
+export function useGamePlay(
   cards: Cards,
   setCards: React.Dispatch<React.SetStateAction<CardT[] | null>>
 ) {

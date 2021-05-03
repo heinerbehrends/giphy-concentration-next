@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import {
   isGameOver,
   useClickCard,
-  useEndMove,
+  useGamePlay,
   useFetchGiphy,
   useParseSearchTerm,
   useShowConfetti,
@@ -16,7 +16,7 @@ function Game() {
   const router = useRouter();
   const searchTerm = useParseSearchTerm(router);
   const { cards, setCards } = useFetchGiphy(searchTerm);
-  const { flipCount, setFlipCount } = useEndMove(cards as Cards, setCards);
+  const { flipCount, setFlipCount } = useGamePlay(cards as Cards, setCards);
   const { clickCard } = useClickCard(cards as Cards, setCards, setFlipCount);
   const { showConfetti, setShowConfetti } = useShowConfetti(
     flipCount,

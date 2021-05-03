@@ -15,9 +15,9 @@ const Input = styled.input`
   padding-left: 1.5rem;
   font-size: 1.5rem;
   border-radius: 1.5rem;
+  border-color: transparent;
   box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
   :focus {
-    border-width: 0.15rem;
     box-shadow: 0.28rem 0.28em 0.56rem rgba(0, 0, 0, 0.3);
     outline: none;
     transform: scale(1.05);
@@ -52,6 +52,7 @@ const SearchSection = styled.section`
 
 const Heading = styled.h1`
   font-size: 3rem;
+  margin: 0px 2rem 3rem 2rem;
 `;
 
 type SearchProps = {
@@ -71,6 +72,7 @@ export default function Search({
       <Form onSubmit={handleSubmit}>
         <TextInput
           type="text"
+          aria-label="Enter search term"
           placeholder={'Enter search term'}
           value={value}
           onChange={handleChange}

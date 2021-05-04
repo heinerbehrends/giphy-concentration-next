@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import Search from '../components/Search';
+import { useSearch } from '../logic/gameLogic';
 
 export default function Home() {
-  const [input, setInput] = useState('');
-  const router = useRouter();
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    router.push(encodeURIComponent(input));
-  }
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setInput(event.target.value);
-  }
+  const { input, handleChange, handleSubmit } = useSearch();
   return (
     <Search
       handleChange={handleChange}

@@ -1,4 +1,4 @@
-import { NextRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import {
   Cards,
@@ -84,4 +84,18 @@ export function useGamePlay(
     }
   }, [flipCount]);
   return { flipCount, setFlipCount };
+}
+
+export function useSearch() {
+  const [input, setInput] = useState('');
+  const router = useRouter();
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    router.push(encodeURIComponent(input));
+  }
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setInput(event.target.value);
+  }
+  return { input, handleChange, handleSubmit };
 }

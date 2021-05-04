@@ -18,9 +18,11 @@ const CardContainer = styled.div`
 
 const CardFront = styled.div`
   position: absolute;
-  backface-visibility: hidden;
   width: 100px;
   height: 100px;
+  img {
+    backface-visibility: hidden;
+  }
 `;
 
 const CardBack = styled.div`

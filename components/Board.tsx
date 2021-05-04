@@ -9,6 +9,13 @@ const BoardStyled = styled.div`
   gap: 12px;
 `;
 
+const BoardSection = styled.section`
+  padding-top: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 type BoardProps = {
   cards: Cards | null;
   flipCount: number;
@@ -20,9 +27,16 @@ function Board({ cards, flipCount, handleCardClick }: BoardProps) {
     return null;
   }
   return (
-    <BoardStyled>
-      {cards.map((card) => Card({ ...card, handleCardClick, flipCount }))}
-    </BoardStyled>
+    <BoardSection
+      onDragStart={(event) => {
+        event.preventDefault();
+        return false;
+      }}
+    >
+      <BoardStyled>
+        {cards.map((card) => Card({ ...card, handleCardClick, flipCount }))}
+      </BoardStyled>
+    </BoardSection>
   );
 }
 

@@ -30,6 +30,7 @@ const CardBack = styled.div`
   width: 100px;
   height: 100px;
   img {
+    backface-visibility: hidden;
     object-fit: cover;
     object-position: center, center;
   }

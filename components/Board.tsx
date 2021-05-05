@@ -1,20 +1,7 @@
 import React from 'react';
 import Card from './Card';
-import styled from 'styled-components';
 import { Cards } from '../logic/logic';
-
-const BoardStyled = styled.div`
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 12px;
-`;
-
-const BoardSection = styled.section`
-  padding-top: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { BoardSection, BoardStyled } from './BoardStyles';
 
 type BoardProps = {
   cards: Cards | null;

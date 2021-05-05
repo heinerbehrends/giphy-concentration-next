@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { CardT, countCards } from './logic';
+import { Cards, countCards } from './logic';
 
 export function useParseSearchTerm(router: NextRouter) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,7 +11,7 @@ export function useParseSearchTerm(router: NextRouter) {
   return searchTerm;
 }
 
-export function isGameOver(cards: CardT[]) {
+export function isGameOver(cards: Cards) {
   if (cards) {
     return cards.length && !countCards(cards);
   }

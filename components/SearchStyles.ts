@@ -39,6 +39,10 @@ export const Button = styled(Input)`
     transform: scale(0.95);
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
   }
+  :focus {
+    box-shadow: 0 0 0 3px #f5f5f5, 0 0 0 6px rgba(255, 151, 151, 0.4),
+      0.4rem 0.4em 0.4rem rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const SearchSection = styled.section`

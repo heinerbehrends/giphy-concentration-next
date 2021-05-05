@@ -1,16 +1,13 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import {
-  isGameOver,
-  useOnClickCard,
-  useGamePlay,
-  useFetchGiphy,
-  useParseSearchTerm,
-  useShowConfetti,
-} from '../logic/gameLogic';
+import { isGameOver, useParseSearchTerm } from '../logic/gameLogic';
 import Board from '../components/Board';
 import { Cards } from '../logic/logic';
 import Confetti from '../components/Confetti';
+import { useOnClickCard } from '../logic/useOnClickCard';
+import { useFetchGiphy } from '../logic/useFetchGiphy';
+import { useShowConfetti } from '../logic/useShowConfetti';
+import { useGamePlay } from '../logic/useGamePlay';
 
 function Game() {
   const router = useRouter();

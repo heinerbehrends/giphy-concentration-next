@@ -5,7 +5,7 @@ export type CardT = {
   isVisible: boolean;
 };
 
-export type Cards = CardT[];
+export type Cards = readonly CardT[];
 
 export function makeCards(linkArray: string[]): Cards {
   const links = shuffleAndDuplicate(linkArray);

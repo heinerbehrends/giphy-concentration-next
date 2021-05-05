@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { CardT } from '../logic/logic';
 import { CardScene, CardContainer, CardFront, CardBack } from './CardStyles';
 

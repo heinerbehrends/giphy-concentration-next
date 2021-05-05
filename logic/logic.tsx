@@ -17,10 +17,6 @@ export function makeCards(linkArray: string[]): Cards {
   }));
 }
 
-export function makeNextCards(cards: [CardT]) {
-  return flipOrRemove(cards, isPair(cards));
-}
-
 export function countCards(cards: Cards) {
   return cards.filter((card) => card.isVisible).length;
 }
@@ -33,6 +29,14 @@ export function flipCard(cards: Cards, key: number) {
 
 export function shouldFlip(cards: Cards, key: number, flipCount: number) {
   return flipCount < 2 && !cards[key].isFlipped && cards[key].isVisible;
+}
+
+export function shouldTriggerFlipBack(
+  cards: Cards,
+  key: number,
+  flipCount: number
+) {
+  return flipCount === 2 && cards[key].isVisible && !cards[key].isFlipped;
 }
 
 function shuffleArray<Type>(array: Type[]): Type[] {
@@ -60,7 +64,7 @@ export function isPair(cards: Cards) {
   return flippedOne.url === flippedTwo.url;
 }
 
-function flipOrRemove(cards: Cards, isPair: boolean) {
+export function flipOrRemove(cards: Cards, isPair: boolean) {
   return cards.map((card) => {
     if (card.isFlipped) {
       return isPair

@@ -6,19 +6,26 @@ import {
   flipCard,
   shouldFlip,
   isPair,
-  makeNextCards,
   countCards,
+  shouldTriggerFlipBack,
+  flipOrRemove,
 } from './logic';
 
 export function useOnClickCard(
   cards: Cards,
   setCards: React.Dispatch<React.SetStateAction<CardT[] | null>>,
-  setFlipCount: React.Dispatch<React.SetStateAction<number>>
+  setFlipCount: React.Dispatch<React.SetStateAction<number>>,
+  timeoutObj: NodeJS.Timeout
 ) {
   function onClickCard(key: number, flipCount: number) {
     if (shouldFlip(cards as Cards, key, flipCount)) {
       setFlipCount(flipCount + 1);
       setCards(flipCard(cards as Cards, key));
+    }
+    if (shouldTriggerFlipBack(cards as Cards, key, flipCount)) {
+      clearTimeout(timeoutObj);
+      setCards(flipCard(flipOrRemove(cards as Cards, isPair(cards)), key));
+      setFlipCount(1);
     }
   }
   return { onClickCard };
@@ -36,7 +43,7 @@ export function useFetchGiphy(searchTerm: string) {
         .then((response) => response.json())
         .then(({ data }) => setCards(data.cards));
     }
-    if (searchTerm && searchTerm !== 'undefined') {
+    if (!!searchTerm && searchTerm !== 'undefined') {
       fetchGifs();
     }
   }, [searchTerm]);
@@ -47,7 +54,11 @@ export function useShowConfetti(flipCount: number, cards: Cards) {
   const [showConfetti, setShowConfetti] = useState(false);
   useEffect(() => {
     if (flipCount === 2 && isPair(cards as CardT[])) {
-      setShowConfetti(true);
+      // if confetti is still falling restart the confetti machine
+      if (showConfetti) setShowConfetti(false);
+      setTimeout(() => {
+        setShowConfetti(true);
+      }, 100);
     }
   }, [cards]);
   return { showConfetti, setShowConfetti };
@@ -74,16 +85,18 @@ export function useGamePlay(
   setCards: React.Dispatch<React.SetStateAction<CardT[] | null>>
 ) {
   const [flipCount, setFlipCount] = useState(0);
+  const [timeoutObj, setTimeoutObj] = useState<NodeJS.Timeout | null>(null);
   useEffect(() => {
     if (flipCount === 2) {
-      const nextCards = makeNextCards(cards as [CardT]);
-      setTimeout(() => {
+      const nextCards = flipOrRemove(cards as [CardT], isPair(cards));
+      const timeout = setTimeout(() => {
         setFlipCount(0);
         setCards(nextCards);
       }, 2500);
+      setTimeoutObj(timeout);
     }
   }, [flipCount]);
-  return { flipCount, setFlipCount };
+  return { flipCount, setFlipCount, timeoutObj };
 }
 
 export function useSearch() {

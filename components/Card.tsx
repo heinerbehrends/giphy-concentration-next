@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CardT } from '../logic/logic';
 
@@ -26,6 +26,7 @@ const CardFront = styled.div`
 `;
 
 const CardBack = styled.div`
+  /* transform: rotate3d(0, 180, 0, 0); */
   transform: rotateY(180deg);
   width: 100px;
   height: 100px;
@@ -44,6 +45,7 @@ export type CardProps = CardT & additionalCardProps;
 
 function Card(props: CardProps) {
   const { url, isFlipped, isVisible, key, handleCardClick, flipCount } = props;
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <CardScene key={key} onClick={() => handleCardClick(key, flipCount)}>
       <CardContainer
@@ -56,14 +58,22 @@ function Card(props: CardProps) {
           <img
             src="backside.gif"
             alt="backside"
-            style={{ width: '100px', height: '100px' }}
+            style={{
+              width: '100px',
+              height: '100px',
+              filter: `${isLoading ? 'grayscale(90%)' : 'none'}`,
+            }}
           />
         </CardFront>
         <CardBack>
           <img
             src={`${url}`}
             alt="frontside"
-            style={{ width: '100px', height: '100px' }}
+            style={{
+              width: '100px',
+              height: '100px',
+            }}
+            onLoad={() => setIsLoading(false)}
           />
         </CardBack>
       </CardContainer>

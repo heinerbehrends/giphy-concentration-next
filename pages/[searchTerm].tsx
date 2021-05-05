@@ -16,11 +16,15 @@ function Game() {
   const router = useRouter();
   const searchTerm = useParseSearchTerm(router);
   const { cards, setCards } = useFetchGiphy(searchTerm);
-  const { flipCount, setFlipCount } = useGamePlay(cards as Cards, setCards);
+  const { flipCount, setFlipCount, timeoutObj } = useGamePlay(
+    cards as Cards,
+    setCards
+  );
   const { onClickCard } = useOnClickCard(
     cards as Cards,
     setCards,
-    setFlipCount
+    setFlipCount,
+    timeoutObj as NodeJS.Timeout
   );
   const { showConfetti, setShowConfetti } = useShowConfetti(
     flipCount,

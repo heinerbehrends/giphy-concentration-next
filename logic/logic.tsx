@@ -7,9 +7,20 @@ export type CardT = {
 
 export type Cards = readonly CardT[];
 
+function shuffleArray<Type>(array: Type[]): Type[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
+  }
+  return array;
+}
+
+function duplicateElements<Type>(array: Type[]) {
+  return array.map((element) => [element, element]).flat();
+}
+
 export function makeCards(linkArray: string[]): Cards {
-  const links = shuffleAndDuplicate(linkArray);
-  return links.map((link, i) => ({
+  return shuffleArray(duplicateElements(linkArray)).map((link, i) => ({
     key: i,
     url: link,
     isFlipped: false,
@@ -37,22 +48,6 @@ export function shouldTriggerFlipBack(
   flipCount: number
 ) {
   return flipCount === 2 && cards[key].isVisible && !cards[key].isFlipped;
-}
-
-function shuffleArray<Type>(array: Type[]): Type[] {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
-  }
-  return array;
-}
-
-function duplicateElement<Type>(array: Type[]) {
-  return array.map((element) => [element, element]).flat();
-}
-
-function shuffleAndDuplicate<Type>(array: Type[]) {
-  return shuffleArray(duplicateElement(array));
 }
 
 function getFlipped(cards: Cards) {

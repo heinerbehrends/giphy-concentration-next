@@ -4,7 +4,7 @@ import { IGif } from '@giphy/js-types';
 import { makeCards } from '../../logic/logic';
 
 const API_KEY = process.env.API_KEY;
-const gf = new GiphyFetch(API_KEY as string);
+const gf = new GiphyFetch(API_KEY!);
 
 function getURL(giphObj: IGif) {
   return giphObj.images.fixed_height.url;

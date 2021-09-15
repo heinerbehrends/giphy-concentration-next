@@ -17,6 +17,7 @@ function Card(props: CardProps) {
         style={{
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           opacity: isVisible ? 100 : 0,
+          cursor: 'pointer',
         }}
       >
         <CardFront>

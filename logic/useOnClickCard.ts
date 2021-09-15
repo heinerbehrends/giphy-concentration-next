@@ -15,13 +15,13 @@ export function useOnClickCard(
   timeoutObj: NodeJS.Timeout
 ) {
   function onClickCard(key: number, flipCount: number) {
-    if (shouldFlip(cards as Cards, key, flipCount)) {
+    if (shouldFlip(cards, key, flipCount)) {
       setFlipCount(flipCount + 1);
-      setCards(flipCard(cards as Cards, key));
+      setCards(flipCard(cards, key));
     }
-    if (shouldTriggerFlipBack(cards as Cards, key, flipCount)) {
+    if (shouldTriggerFlipBack(cards, key, flipCount)) {
       clearTimeout(timeoutObj);
-      setCards(flipCard(flipOrRemove(cards as Cards, isPair(cards)), key));
+      setCards(flipCard(flipOrRemove(cards, isPair(cards)), key));
       setFlipCount(1);
     }
   }

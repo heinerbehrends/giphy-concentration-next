@@ -9,7 +9,7 @@ export function useGamePlay(
   const [timeoutObj, setTimeoutObj] = useState<NodeJS.Timeout | null>(null);
   useEffect(() => {
     if (flipCount === 2) {
-      const nextCards = flipOrRemove(cards as [CardT], isPair(cards));
+      const nextCards = flipOrRemove(cards, isPair(cards));
       const timeout = setTimeout(() => {
         setFlipCount(0);
         setCards(nextCards);

@@ -2,7 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { isGameOver, useParseSearchTerm } from '../logic/gameLogic';
 import Board from '../components/Board';
-import { Cards } from '../logic/logic';
 import Confetti from '../components/Confetti';
 import { useOnClickCard } from '../logic/useOnClickCard';
 import { useFetchGiphy } from '../logic/useFetchGiphy';
@@ -13,27 +12,28 @@ function Game() {
   const router = useRouter();
   const searchTerm = useParseSearchTerm(router);
   const { cards, setCards } = useFetchGiphy(searchTerm);
-  const { flipCount, setFlipCount, timeoutObj } = useGamePlay(
-    cards as Cards,
-    setCards
-  );
+  const { flipCount, setFlipCount, timeoutObj } = useGamePlay(cards!, setCards);
   const { onClickCard } = useOnClickCard(
-    cards as Cards,
+    cards!,
     setCards,
     setFlipCount,
-    timeoutObj as NodeJS.Timeout
+    timeoutObj!
   );
-  const { showConfetti, setShowConfetti } = useShowConfetti(
-    flipCount,
-    cards as Cards
-  );
-
-  if (isGameOver(cards as Cards)) {
+  const { showConfetti, setShowConfetti } = useShowConfetti(flipCount, cards!);
+  if (isGameOver(cards!)) {
     router.push('/');
   }
   return (
     <>
-      {showConfetti ? <Confetti setShowConfetti={setShowConfetti} /> : null}
+      {showConfetti ? (
+        <Confetti
+          // if a confetti starts while there's still confetti falling
+          // shouldRecycle gets set to true
+          shouldRecycle={showConfetti > 1}
+          showConfetti={showConfetti}
+          setShowConfetti={setShowConfetti}
+        />
+      ) : null}
       <Board
         cards={cards}
         flipCount={flipCount}

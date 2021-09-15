@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import { Cards, isPair, CardT } from './logic';
 
 export function useShowConfetti(flipCount: number, cards: Cards) {
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(0);
   useEffect(() => {
-    if (flipCount === 2 && isPair(cards as CardT[])) {
-      // if confetti is still falling restart the confetti machine
-      if (showConfetti) setShowConfetti(false);
-      setTimeout(() => {
-        setShowConfetti(true);
-      }, 100);
+    // sets showConfetti back to stop the recycle loop
+    if (showConfetti > 1) {
+      setTimeout(() => setShowConfetti(showConfetti - 1), 1000);
     }
-  }, [cards]);
+    if (flipCount === 2 && isPair(cards as CardT[])) {
+      setShowConfetti(showConfetti + 1);
+    }
+  }, [cards, flipCount]);
   return { showConfetti, setShowConfetti };
 }

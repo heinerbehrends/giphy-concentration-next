@@ -1,8 +1,16 @@
-import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { AppProps } from 'next/app';
+import { useState } from 'react';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const [nrOfCardTurned, setNrOfCardsTurned] = useState(0);
+  return (
+    <Component
+      nrOfCardsTurned={nrOfCardTurned}
+      setNrOfCardsTurned={setNrOfCardsTurned}
+      {...pageProps}
+    />
+  );
 }
 
 export default MyApp;

@@ -12,9 +12,12 @@ export function useOnClickCard(
   cards: Cards,
   setCards: React.Dispatch<React.SetStateAction<CardT[] | null>>,
   setFlipCount: React.Dispatch<React.SetStateAction<number>>,
-  timeoutObj: NodeJS.Timeout
+  timeoutObj: NodeJS.Timeout,
+  nrOfCardsTurned: number,
+  setNrOfCardsTurned: React.Dispatch<React.SetStateAction<number>>
 ) {
   function onClickCard(key: number, flipCount: number) {
+    setNrOfCardsTurned(nrOfCardsTurned + 1);
     if (shouldFlip(cards, key, flipCount)) {
       setFlipCount(flipCount + 1);
       setCards(flipCard(cards, key));

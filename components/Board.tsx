@@ -7,9 +7,10 @@ type BoardProps = {
   cards: Cards | null;
   flipCount: number;
   handleCardClick: (key: number, flipCount: number) => void;
+  children?: React.ReactNode;
 };
 
-function Board({ cards, flipCount, handleCardClick }: BoardProps) {
+function Board({ cards, flipCount, handleCardClick, children }: BoardProps) {
   if (!cards) {
     return null;
   }
@@ -21,6 +22,7 @@ function Board({ cards, flipCount, handleCardClick }: BoardProps) {
       }}
     >
       <BoardStyled>
+        {children}
         {cards.map((card) => Card({ ...card, handleCardClick, flipCount }))}
       </BoardStyled>
     </BoardSection>

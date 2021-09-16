@@ -11,4 +11,11 @@ export const BoardSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+`;
+
+export const MovesSection = styled.p`
+  margin: 0 auto;
+  font-size: 1.5rem;
+  width: 100%;
 `;

@@ -14,8 +14,9 @@ export const BoardSection = styled.section`
   text-align: center;
 `;
 
-export const MovesSection = styled.p`
+export const MessageSection = styled.span`
+  display: inline-block;
   margin: 0 auto;
+  padding-top: 4rem;
   font-size: 1.5rem;
-  width: 100%;
 `;

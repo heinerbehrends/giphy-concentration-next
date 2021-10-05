@@ -15,6 +15,7 @@ export const CardContainer = styled.div`
 `;
 
 export const CardFront = styled.div`
+  transform: rotateY(0deg);
   position: absolute;
   width: 100px;
   height: 100px;

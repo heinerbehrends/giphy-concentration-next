@@ -25,7 +25,6 @@ export const CardFront = styled.div`
 `;
 
 export const CardBack = styled.div`
-  /* transform: rotate3d(0, 180, 0, 0); */
   transform: rotateY(180deg);
   width: 100px;
   height: 100px;

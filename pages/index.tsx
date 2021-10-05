@@ -9,13 +9,11 @@ type HomeProps = {
 export default function Home({ nrOfCardsTurned }: HomeProps) {
   const { input, handleChange, handleSubmit } = useSearch();
   return (
-    <>
-      <Search
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        value={input}
-        nrOfCardsTurned={nrOfCardsTurned}
-      />
-    </>
+    <Search
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      value={input}
+      nrOfCardsTurned={nrOfCardsTurned}
+    />
   );
 }

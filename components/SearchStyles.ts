@@ -30,11 +30,13 @@ export const TextInput = styled(Input)`
 `;
 
 export const Button = styled(Input)`
+  cursor: pointer;
+  border-radius: 0.5rem;
   margin-left: 3rem;
   padding-left: 3rem;
   padding-right: 3rem;
   font-weight: 700;
-  background-color: rgba(255, 151, 151, 0.4);
+  background-color: aliceblue;
   :active {
     transform: scale(0.95);
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);

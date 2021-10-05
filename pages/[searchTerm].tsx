@@ -31,10 +31,10 @@ function Game({ nrOfCardsTurned, setNrOfCardsTurned }: GameProps) {
     nrOfCardsTurned,
     setNrOfCardsTurned
   );
-  const { showConfetti, setShowConfetti } = useShowConfetti(flipCount, cards!);
+  const { showConfetti } = useShowConfetti(flipCount, cards!);
   const gameIsOver = isGameOver(cards!);
   if (gameIsOver) {
-    setTimeout(() => router.push('/'), 2000);
+    setTimeout(() => router.push('/'), 4000);
   }
   return (
     <>
@@ -43,11 +43,8 @@ function Game({ nrOfCardsTurned, setNrOfCardsTurned }: GameProps) {
           // if a confetti starts while there's still confetti falling
           // shouldRecycle gets set to true so that confetti continues
           shouldRecycle={showConfetti > 1}
-          showConfetti={showConfetti}
-          setShowConfetti={setShowConfetti}
         />
       ) : null}
-
       <Board cards={cards} flipCount={flipCount} handleCardClick={onClickCard}>
         {gameIsOver ? (
           <MovesSection>

@@ -16,7 +16,8 @@ export function useOnClickCard(
   nrOfCardsTurned: number,
   setNrOfCardsTurned: React.Dispatch<React.SetStateAction<number>>
 ) {
-  function onClickCard(key: number, flipCount: number) {
+  function onClickCard(key: number, flipCount: number, progress: number) {
+    if (progress < 24) return;
     setNrOfCardsTurned(nrOfCardsTurned + 1);
     if (shouldFlip(cards, key, flipCount)) {
       setFlipCount(flipCount + 1);

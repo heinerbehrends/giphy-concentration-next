@@ -9,7 +9,7 @@ import { useShowConfetti } from '../logic/useShowConfetti';
 import { useGamePlay } from '../logic/useGamePlay';
 import { CardT } from '../logic/logic';
 
-import { MovesSection } from '../components/BoardStyles';
+import { MessageSection } from '../components/BoardStyles';
 
 type GameProps = {
   nrOfCardsTurned: number;
@@ -21,7 +21,7 @@ function Game({ nrOfCardsTurned, setNrOfCardsTurned }: GameProps) {
   useEffect(() => setNrOfCardsTurned(0), []);
   const router = useRouter();
   const searchTerm = useParseSearchTerm(router);
-  const { cards, setCards } = useFetchGiphy(searchTerm);
+  const { error, cards, setCards } = useFetchGiphy(searchTerm);
   const { flipCount, setFlipCount, timeoutObj } = useGamePlay(cards!, setCards);
   const { onClickCard } = useOnClickCard(
     cards! as CardT[],
@@ -36,8 +36,12 @@ function Game({ nrOfCardsTurned, setNrOfCardsTurned }: GameProps) {
   if (gameIsOver) {
     setTimeout(() => router.push('/'), 4000);
   }
+  if (error) {
+    setTimeout(() => router.push('/'), 3000);
+  }
   return (
     <>
+      {error ? <MessageSection>{error}</MessageSection> : null}
       {showConfetti > 0 ? (
         <Confetti
           // if a confetti starts while there's still confetti falling
@@ -47,9 +51,9 @@ function Game({ nrOfCardsTurned, setNrOfCardsTurned }: GameProps) {
       ) : null}
       <Board cards={cards} flipCount={flipCount} handleCardClick={onClickCard}>
         {gameIsOver ? (
-          <MovesSection>
+          <MessageSection>
             It took you {nrOfCardsTurned} moves to finish the game
-          </MovesSection>
+          </MessageSection>
         ) : null}
       </Board>
     </>

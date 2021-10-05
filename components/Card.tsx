@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CardT } from '../logic/logic';
 import { CardScene, CardContainer, CardFront, CardBack } from './CardStyles';
 
 type additionalCardProps = {
-  handleCardClick: (key: number, flipCount: number) => void;
+  handleCardClick: (key: number, flipCount: number, progress: number) => void;
   flipCount: number;
+  progress: number;
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
 };
 export type CardProps = CardT & additionalCardProps;
 
 function Card(props: CardProps) {
-  const { url, isFlipped, isVisible, key, handleCardClick, flipCount } = props;
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    url,
+    isFlipped,
+    isVisible,
+    key,
+    handleCardClick,
+    flipCount,
+    progress,
+    setProgress,
+  } = props;
   return (
-    <CardScene key={key} onClick={() => handleCardClick(key, flipCount)}>
+    <CardScene
+      key={key}
+      onClick={() => handleCardClick(key, flipCount, progress)}
+    >
       <CardContainer
         style={{
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           opacity: isVisible ? 100 : 0,
-          cursor: 'pointer',
+          cursor: progress === 24 ? 'pointer' : 'default',
         }}
       >
         <CardFront>
@@ -27,7 +40,7 @@ function Card(props: CardProps) {
             style={{
               width: '100px',
               height: '100px',
-              filter: `${isLoading ? 'grayscale(90%)' : 'none'}`,
+              filter: `${progress === 24 ? 'none' : 'grayscale(90%)'}`,
             }}
           />
         </CardFront>
@@ -39,7 +52,7 @@ function Card(props: CardProps) {
               width: '100px',
               height: '100px',
             }}
-            onLoad={() => setIsLoading(false)}
+            onLoad={() => setProgress(progress + 1)}
           />
         </CardBack>
       </CardContainer>

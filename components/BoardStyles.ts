@@ -9,6 +9,7 @@ export const BoardStyled = styled.div`
 export const BoardSection = styled.section`
   padding-top: 48px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;

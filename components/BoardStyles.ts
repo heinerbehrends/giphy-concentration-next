@@ -17,6 +17,7 @@ export const BoardSection = styled.section`
 
 export const MessageSection = styled.span`
   display: inline-block;
+  text-align: center;
   margin: 0 auto;
   padding-top: 4rem;
   font-size: 1.5rem;

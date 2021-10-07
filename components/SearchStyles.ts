@@ -10,40 +10,30 @@ export const Input = styled.input`
   padding: 1rem;
   padding-left: 1.5rem;
   font-size: 1.5rem;
-  border-radius: 1.5rem;
+  transform: skew(-10deg);
+  /* border-radius: 1.5rem; */
   border-color: transparent;
-  box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
-  transition: transform 200ms ease-in;
+  box-shadow: 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
   :focus {
-    box-shadow: 0.28rem 0.28em 0.56rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0.4rem 0.4rem rgba(0, 0, 0, 0.3);
     outline: none;
-    transform: scale(1.025);
+    transform: scale(1.025) skew(-10deg);
   }
 `;
 
-export const TextInput = styled(Input)`
-  :focus {
-    box-shadow: 0.3rem 0.3em 0.6rem rgba(0, 0, 0, 0.3);
-    /* 0.1rem 0.1rem 0.2rem rgb(189, 189, 189) inset; */
-    outline: none;
-  }
-`;
+export const TextInput = styled(Input)``;
 
 export const Button = styled(Input)`
   cursor: pointer;
-  border-radius: 0.5rem;
   margin-left: 3rem;
   padding-left: 3rem;
   padding-right: 3rem;
   font-weight: 700;
-  background-color: aliceblue;
+  color: white;
+  background-color: #1cac78;
   :active {
-    transform: scale(0.95);
-    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
-  }
-  :focus {
-    box-shadow: 0 0 0 3px #f5f5f5, 0 0 0 6px rgba(255, 151, 151, 0.4),
-      0.4rem 0.4em 0.4rem rgba(0, 0, 0, 0.3);
+    transform: scale(0.95) skew(-10deg);
+    box-shadow: 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -62,5 +52,6 @@ export const Heading = styled.h1`
 export const ReplayButton = styled(Button)`
   display: block;
   margin: 0 auto;
+  background-color: orange;
   margin-top: 2rem;
 `;

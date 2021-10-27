@@ -11,13 +11,12 @@ export const Input = styled.input`
   padding-left: 1.5rem;
   font-size: 1.5rem;
   transform: skew(-10deg);
-  /* border-radius: 1.5rem; */
   border-color: transparent;
   box-shadow: 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
   :focus {
     box-shadow: 0.4rem 0.4rem rgba(0, 0, 0, 0.3);
     outline: none;
-    transform: scale(1.025) skew(-10deg);
+    transform: scale(1.02) skew(-10deg);
   }
 `;
 
@@ -31,9 +30,13 @@ export const Button = styled(Input)`
   font-weight: 700;
   color: white;
   background-color: #1cac78;
+  :hover {
+    transform: scale(1.02) skew(-10deg);
+    box-shadow: 0.4rem 0.4rem rgba(0, 0, 0, 0.3);
+  }
   :active {
     transform: scale(0.95) skew(-10deg);
-    box-shadow: 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0.15rem 0.15rem rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -47,6 +50,8 @@ export const SearchSection = styled.section`
 
 export const Heading = styled.h1`
   font-size: 3rem;
+  color: #333;
+  text-shadow: 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
 `;
 
 export const ReplayButton = styled(Button)`
